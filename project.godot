@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Sword Game"
+config/name="Gun Game"
 run/main_scene="res://src/screens/World.tscn"
 config/icon="res://icon.png"
 
