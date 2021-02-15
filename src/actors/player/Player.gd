@@ -6,8 +6,8 @@ const ACCELERATION = 512
 const MAX_SPEED = 300
 const FRICTION = 0.5
 const AIR_RESISTANCE = 0.01
-const GRAVITY = 300
-const SHOT_FORCE = 300
+const GRAVITY = 500
+const SHOT_FORCE = 400
 
 var velocity = Vector2.ZERO
 var shot_fired = false
