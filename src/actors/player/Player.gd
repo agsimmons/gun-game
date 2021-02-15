@@ -46,8 +46,10 @@ func _physics_process(delta):
 	if shot_fired:
 		if num_bullets > 0:
 			var shot_force_vector = mouse_position.direction_to(position)
-			SoundGunshot.play()
+			var dampening = (cos(shot_force_vector.angle_to(velocity)) + 1) / 2
+			velocity *= dampening
 			velocity += shot_force_vector * SHOT_FORCE
+			SoundGunshot.play()
 			num_bullets -= 1
 		else:
 			SoundDryFire.play()
