@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+const AIR_MANEUVERABILITY = 100
 const MAX_SPEED = 300
 const FRICTION = 0.5
 const AIR_RESISTANCE = 0.01
@@ -23,7 +24,9 @@ func _unhandled_input(event):
 		shot_fired = true
 
 
-func _physics_process(delta):	
+func _physics_process(delta):
+	var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	
 	if is_on_floor():
 		if num_bullets < DEFAULT_NUM_BULLETS:
 			# Reload Bullets
@@ -35,6 +38,9 @@ func _physics_process(delta):
 	else:
 		# Apply Gravity
 		velocity.y += GRAVITY * delta
+		
+		# Apply Horizontal Air Movement
+		velocity.x += x_input * AIR_MANEUVERABILITY * delta
 		
 		# Apply Air Resistance
 		velocity.x = lerp(velocity.x, 0, AIR_RESISTANCE)
