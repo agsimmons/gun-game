@@ -3,7 +3,7 @@ extends KinematicBody2D
 const MAX_SPEED = 300
 const FRICTION = 0.5
 const AIR_RESISTANCE = 0.01
-const GRAVITY = 500
+const GRAVITY = 600
 const SHOT_FORCE = 400
 
 var velocity = Vector2.ZERO
