@@ -5,11 +5,13 @@ const FRICTION = 0.5
 const AIR_RESISTANCE = 0.01
 const GRAVITY = 500
 const SHOT_FORCE = 400
+const PEAK_TIMESLOW_THRESHOLD = 10
+const PEAK_TIMESLOW_AMT = 0.1
 
 var velocity = Vector2.ZERO
 var shot_fired = false
 var mouse_position = Vector2.ZERO
-var dampening_mode = 0
+var dampening_mode = 2
 
 const DEFAULT_NUM_BULLETS = 2
 var num_bullets = DEFAULT_NUM_BULLETS
@@ -35,7 +37,10 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, 0, FRICTION)
 	else:
 		# Apply Gravity
-		velocity.y += GRAVITY * delta
+		if(abs(velocity.y) < PEAK_TIMESLOW_THRESHOLD):
+			velocity.y += GRAVITY * delta * PEAK_TIMESLOW_AMT
+		else:
+			velocity.y += GRAVITY * delta 
 		
 		# Apply Air Resistance
 		velocity.x = lerp(velocity.x, 0, AIR_RESISTANCE)
