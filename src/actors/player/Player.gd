@@ -9,6 +9,7 @@ const SHOT_FORCE = 400
 var velocity = Vector2.ZERO
 var shot_fired = false
 var mouse_position = Vector2.ZERO
+var dampening_mode = 0
 
 const DEFAULT_NUM_BULLETS = 2
 var num_bullets = DEFAULT_NUM_BULLETS
@@ -43,8 +44,22 @@ func _physics_process(delta):
 	if shot_fired:
 		if num_bullets > 0:
 			var shot_force_vector = mouse_position.direction_to(position)
-			var dampening = (cos(shot_force_vector.angle_to(velocity)) + 1) / 2
-			velocity *= dampening
+			if dampening_mode == 1:
+				if !is_on_floor():
+					'var xDampening = 1 - (abs(shot_force_vector.normalized().x - velocity.normalized().x)/2)'
+					var yDampening = 1 - (abs(shot_force_vector.normalized().y - velocity.normalized().y)/2)
+					'velocity.x*=xDampening'
+					velocity.y*=yDampening
+			else: if dampening_mode == 2:
+				if !is_on_floor():
+					var xDampening = 1 - (abs(shot_force_vector.normalized().x - velocity.normalized().x)/2)
+					var yDampening = 1 - (abs(shot_force_vector.normalized().y - velocity.normalized().y)/2)
+					velocity.x*=xDampening
+					velocity.y*=yDampening
+			else:			
+				var dampening = (cos(shot_force_vector.angle_to(velocity)) + 1) / 2
+				velocity *= dampening
+				
 			velocity += shot_force_vector * SHOT_FORCE
 			SoundGunshot.play()
 			num_bullets -= 1
