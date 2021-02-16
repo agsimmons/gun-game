@@ -14,13 +14,17 @@ var mouse_position = Vector2.ZERO
 const DEFAULT_NUM_BULLETS = 2
 var num_bullets = DEFAULT_NUM_BULLETS
 
+onready var Gun = $Gun
 onready var SoundGunshot = $SoundGunshot
 onready var SoundReload = $SoundReload
 onready var SoundDryFire = $SoundDryFire
 
 func _unhandled_input(event):
+	mouse_position = get_global_mouse_position()
+	
+	Gun.rotate(Gun.get_angle_to(mouse_position))
+	
 	if event.is_action_pressed("click"):
-		mouse_position = get_global_mouse_position()
 		shot_fired = true
 
 
@@ -53,6 +57,7 @@ func _physics_process(delta):
 			velocity *= dampening
 			velocity += shot_force_vector * SHOT_FORCE
 			SoundGunshot.play()
+			#Gun.shoot(shot_force_vector)
 			num_bullets -= 1
 		else:
 			SoundDryFire.play()
