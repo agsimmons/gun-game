@@ -62,9 +62,13 @@ func _physics_process(delta):
 		else:
 			SoundDryFire.play()
 		shot_fired = false
-		
-	#velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-	#velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
+
+	# Clamp Velocity
+	var speed = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
+	if speed > MAX_SPEED:
+		var velocity_scale = MAX_SPEED / speed
+		velocity.x *= velocity_scale
+		velocity.y *= velocity_scale
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 
