@@ -1,7 +1,5 @@
 extends Node2D
 
-#onready var BulletSpawnPosition = $BulletSpawnPosition
-
 export var ammo_capacity = 2
 export var shot_force = 400
 export (Resource) var gunshot_effect
@@ -14,13 +12,14 @@ var gunshot_player
 var dry_fire_player
 var reload_player
 
+onready var BulletSpawnPosition = $BulletSpawnPosition
+
 
 func _ready():
 	# Initialize Ammo to Full
 	ammo = ammo_capacity
 
 	gunshot_player = AudioStreamPlayer.new()
-	# gunshot_player.stream = gunshot_effect
 	gunshot_player.stream = gunshot_effect
 	self.add_child(gunshot_player)
 
