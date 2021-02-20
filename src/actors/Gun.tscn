@@ -1,25 +1,25 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/actors/player/Gun.gd" type="Script" id=1]
+[ext_resource path="res://src/actors/Gun.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/reload.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/sounds/gunshot.wav" type="AudioStream" id=3]
-[ext_resource path="res://assets/sounds/dry_fire.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sprites/gun.png" type="Texture" id=5]
-[ext_resource path="res://src/actors/player/Bullet.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/effects/ShotEffect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/effects/ShotEffect.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actors/Bullet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sounds/dry_fire.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sprites/gun.png" type="Texture" id=7]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource( 1 )
-bullet_type = ExtResource( 6 )
+bullet_type = ExtResource( 5 )
 gunshot_effect = ExtResource( 3 )
-dry_fire_effect = ExtResource( 4 )
+dry_fire_effect = ExtResource( 6 )
 reload_effect = ExtResource( 2 )
-gunshot_particle_effect = ExtResource( 7 )
+gunshot_particle_effect = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 8, 0 )
 scale = Vector2( 1.25, 1.25 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="GunStartPosition" type="Position2D" parent="."]
 position = Vector2( 13.3259, -0.5 )
