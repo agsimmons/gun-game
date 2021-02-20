@@ -5,7 +5,7 @@ signal reloaded
 
 export var ammo_capacity = 2
 export var shot_force = 400
-export var shot_speed = 1500
+export var shot_speed = 800
 export (Resource) var bullet_type
 export (Resource) var gunshot_effect
 export (Resource) var dry_fire_effect
