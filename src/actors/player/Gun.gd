@@ -10,6 +10,7 @@ export (Resource) var bullet_type
 export (Resource) var gunshot_effect
 export (Resource) var dry_fire_effect
 export (Resource) var reload_effect
+export (Resource) var gunshot_particle_effect
 
 var ammo = 0
 
@@ -41,13 +42,24 @@ func _ready():
 func shoot():
 	if ammo > 0:
 		var shot_direction = BulletSpawnPosition.global_position.direction_to(GunStartPosition.global_position)
+
+		# Spawn Bullet
 		var bullet = bullet_type.instance()
 		bullet.position = BulletSpawnPosition.global_position
 		bullet.rotation = BulletSpawnPosition.global_rotation
 		bullet.velocity = shot_direction * shot_speed
 		get_tree().get_root().add_child(bullet)
+		
+		# Spawn Shot Effect
+		var particle_instance = gunshot_particle_effect.instance()
+		particle_instance.global_position = BulletSpawnPosition.global_position
+		particle_instance.rotation = BulletSpawnPosition.global_rotation
+		particle_instance.emitting = true
+		get_tree().get_root().add_child(particle_instance)
+		
 		ammo -= 1
 		self.gunshot_player.play()
+
 		emit_signal("shot_fired")
 	else:
 		self.dry_fire_player.play()
