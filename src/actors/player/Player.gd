@@ -7,8 +7,8 @@ const GRAVITY = 600
 const AIR_MANEUVERABILITY = 100
 
 var velocity = Vector2.ZERO
-var shot_fired = false
 var mouse_position = Vector2.ZERO
+var shot_events = []
 
 onready var Gun = $Gun
 
@@ -19,15 +19,16 @@ func _unhandled_input(event):
 	Gun.rotate(Gun.get_angle_to(mouse_position))
 
 	if event.is_action_pressed("click"):
-		shot_fired = true
+		Gun.shoot()
 
 
 func _physics_process(delta):
 	var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 
 	if is_on_floor():
-		# Reload Gun
-		Gun.reload()
+		if shot_events.empty():
+			# Reload Gun
+			Gun.reload()
 
 		# Apply Friction
 		velocity.x = lerp(velocity.x, 0, FRICTION)
@@ -42,18 +43,13 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, 0, AIR_RESISTANCE)
 		velocity.y = lerp(velocity.y, 0, AIR_RESISTANCE)
 
-	if shot_fired:
-		if Gun.ammo > 0:
-			var shot_force_vector = mouse_position.direction_to(position)
-			var dampening = (cos(shot_force_vector.angle_to(velocity)) + 1) / 2
-			velocity *= dampening
-			velocity += shot_force_vector * Gun.shot_force
-			Gun.shoot()
-		else:
-			# This is just to trigger the dry-fire sound effect. There is
-			# probably a better way to format this code
-			Gun.shoot()
-		shot_fired = false
+	# Handle Shot Events
+	while !shot_events.empty():
+		var shot_event_force = shot_events.pop_front()
+		var shot_force_vector = mouse_position.direction_to(position)
+		var dampening = (cos(shot_force_vector.angle_to(velocity)) + 1) / 2
+		velocity *= dampening
+		velocity += shot_force_vector * shot_event_force
 
 	# Clamp Velocity
 	var speed = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
@@ -63,3 +59,7 @@ func _physics_process(delta):
 		velocity.y *= velocity_scale
 
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+func _on_Gun_shot_fired():
+	shot_events.append(Gun.shot_force)

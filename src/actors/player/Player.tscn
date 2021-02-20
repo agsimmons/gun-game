@@ -19,3 +19,4 @@ position = Vector2( 0.553256, 0.553318 )
 shape = SubResource( 1 )
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
+[connection signal="shot_fired" from="Gun" to="." method="_on_Gun_shot_fired"]
