@@ -79,6 +79,14 @@ click={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="wall"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="object"
+2d_physics/layer_5="bullet"
+
 [rendering]
 
 environment/default_clear_color=Color( 0.247059, 0.219608, 0.317647, 1 )

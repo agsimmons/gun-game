@@ -5,6 +5,8 @@ signal reloaded
 
 export var ammo_capacity = 2
 export var shot_force = 400
+export var shot_speed = 1500
+export (Resource) var bullet_type
 export (Resource) var gunshot_effect
 export (Resource) var dry_fire_effect
 export (Resource) var reload_effect
@@ -15,6 +17,7 @@ var gunshot_player
 var dry_fire_player
 var reload_player
 
+onready var GunStartPosition = $GunStartPosition
 onready var BulletSpawnPosition = $BulletSpawnPosition
 
 
@@ -37,9 +40,15 @@ func _ready():
 
 func shoot():
 	if ammo > 0:
-		emit_signal("shot_fired")
-		self.gunshot_player.play()
+		var shot_direction = BulletSpawnPosition.global_position.direction_to(GunStartPosition.global_position)
+		var bullet = bullet_type.instance()
+		bullet.position = BulletSpawnPosition.global_position
+		bullet.rotation = BulletSpawnPosition.global_rotation
+		bullet.velocity = shot_direction * shot_speed
+		get_tree().get_root().add_child(bullet)
 		ammo -= 1
+		self.gunshot_player.play()
+		emit_signal("shot_fired")
 	else:
 		self.dry_fire_player.play()
 
