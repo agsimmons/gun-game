@@ -1,0 +1,23 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/actors/Gun/BaseGun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/Gun/pistol.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/reload.wav" type="AudioStream" id=3]
+[ext_resource path="res://src/actors/Bullet/PistolBullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sounds/dry_fire.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/gunshot.wav" type="AudioStream" id=6]
+[ext_resource path="res://src/effects/ShotEffect/PistolShotEffect.tscn" type="PackedScene" id=7]
+
+[node name="Pistol" instance=ExtResource( 1 )]
+bullet_type = ExtResource( 4 )
+gunshot_effect = ExtResource( 6 )
+dry_fire_effect = ExtResource( 5 )
+reload_effect = ExtResource( 3 )
+gunshot_particle_effect = ExtResource( 7 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+offset = Vector2( 0, 0.5 )
+
+[node name="BulletSpawnPosition" parent="." index="2"]
+position = Vector2( 13.0448, 0 )

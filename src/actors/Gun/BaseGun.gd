@@ -7,9 +7,9 @@ export var ammo_capacity = 2
 export var shot_force = 400
 export var shot_speed = 800
 export (Resource) var bullet_type
-export (Resource) var gunshot_effect
-export (Resource) var dry_fire_effect
-export (Resource) var reload_effect
+export (AudioStream) var gunshot_effect
+export (AudioStream) var dry_fire_effect
+export (AudioStream) var reload_effect
 export (Resource) var gunshot_particle_effect
 
 var ammo = 0
@@ -41,7 +41,7 @@ func _ready():
 
 func shoot():
 	if ammo > 0:
-		var shot_direction = BulletSpawnPosition.global_position.direction_to(GunStartPosition.global_position)
+		var shot_direction = GunStartPosition.global_position.direction_to(BulletSpawnPosition.global_position)
 
 		# Spawn Bullet
 		var bullet = bullet_type.instance()

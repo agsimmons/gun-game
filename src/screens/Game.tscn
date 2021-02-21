@@ -5,3 +5,4 @@
 [node name="Game" type="Node"]
 
 [node name="DebugLevel" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0.111359, 0 )

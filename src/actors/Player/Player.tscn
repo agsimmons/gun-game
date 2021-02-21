@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/sprites/player.png" type="Texture" id=1]
-[ext_resource path="res://src/actors/Player.gd" type="Script" id=2]
-[ext_resource path="res://src/actors/Gun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sprites/Player/player.png" type="Texture" id=1]
+[ext_resource path="res://src/actors/Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://src/actors/Gun/Pistol.tscn" type="PackedScene" id=3]
 
 
 [sub_resource type="CapsuleShape2D" id=1]

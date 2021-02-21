@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/sprites/box.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Object/box.png" type="Texture" id=1]
+
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.2655, 10.4885 )
+extents = Vector2( 15.7216, 11.9798 )
 
 [node name="Box" type="StaticBody2D"]
 collision_layer = 8
