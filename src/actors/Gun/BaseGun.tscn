@@ -9,8 +9,5 @@ script = ExtResource( 1 )
 position = Vector2( 8, 0 )
 scale = Vector2( 1.25, 1.25 )
 
-[node name="GunStartPosition" type="Position2D" parent="."]
-position = Vector2( 4.75, 0 )
-
 [node name="BulletSpawnPosition" type="Position2D" parent="."]
 position = Vector2( 13.326, 0 )

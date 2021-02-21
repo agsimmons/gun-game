@@ -18,7 +18,6 @@ var gunshot_player
 var dry_fire_player
 var reload_player
 
-onready var GunStartPosition = $GunStartPosition
 onready var BulletSpawnPosition = $BulletSpawnPosition
 
 
@@ -41,7 +40,7 @@ func _ready():
 
 func shoot():
 	if ammo > 0:
-		var shot_direction = GunStartPosition.global_position.direction_to(BulletSpawnPosition.global_position)
+		var shot_direction = global_position.direction_to(BulletSpawnPosition.global_position)
 
 		# Spawn Bullet
 		var bullet = bullet_type.instance()
