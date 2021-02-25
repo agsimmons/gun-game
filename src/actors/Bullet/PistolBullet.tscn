@@ -5,13 +5,13 @@
 [ext_resource path="res://src/effects/BulletImpact/PistolBulletImpactEffect.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.49989, 2.03125 )
+extents = Vector2( 3.55229, 1.99786 )
 
 [node name="PistolBullet" instance=ExtResource( 1 )]
 bullet_impact_effect = ExtResource( 3 )
 
-[node name="Sprite" parent="." index="0"]
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 2 )
