@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-const FRICTION = 0.5
-const AIR_RESISTANCE = 0.01
+const GROUND_DAMPING = 50
+const AIR_DAMPING = 1
 const MAX_SPEED = 400
 const GRAVITY = 600
 const AIR_MANEUVERABILITY = 100
@@ -30,8 +30,8 @@ func _physics_process(delta):
 			# Reload Gun
 			Gun.reload()
 
-		# Apply Friction
-		velocity.x = lerp(velocity.x, 0, FRICTION)
+		# Apply Ground Damping
+		velocity /= (1 + GROUND_DAMPING * delta)
 	else:
 		# Apply Gravity
 		velocity.y += GRAVITY * delta
@@ -39,9 +39,8 @@ func _physics_process(delta):
 		# Apply Horizontal Air Movement
 		velocity.x += x_input * AIR_MANEUVERABILITY * delta
 
-		# Apply Air Resistance
-		velocity.x = lerp(velocity.x, 0, AIR_RESISTANCE)
-		velocity.y = lerp(velocity.y, 0, AIR_RESISTANCE)
+		# Apply Air Damping
+		velocity /= (1 + AIR_DAMPING * delta)
 
 	# Handle Shot Events
 	while !shot_events.empty():
