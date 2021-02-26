@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const GROUND_DAMPING = 50
 const AIR_DAMPING = 1
+const SHOT_DAMPENING = 1  # 0 - 1
 const MAX_SPEED = 400
 const GRAVITY = 600
 const AIR_MANEUVERABILITY = 100
@@ -44,10 +45,13 @@ func _physics_process(delta):
 
 	# Handle Shot Events
 	while !shot_events.empty():
+		# Apply shot dampening
 		var shot_event_force = shot_events.pop_front()
 		var shot_force_vector = mouse_position.direction_to(position)
 		var dampening = (cos(shot_force_vector.angle_to(velocity)) + 1) / 2
-		velocity *= dampening
+		velocity *= dampening * SHOT_DAMPENING
+		
+		# Apply shot force
 		velocity += shot_force_vector * shot_event_force
 
 	# Clamp Velocity
